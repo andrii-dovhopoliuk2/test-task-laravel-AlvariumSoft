@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Site;
+
 class SiteController extends Controller
 {
     /**
@@ -10,7 +12,9 @@ class SiteController extends Controller
      */
     public function setItemsOnPage($count = 10)
     {
-        session()->put('items_on_page', intval($count));
+        if (in_array($count, Site::getItemsOnPage())) {
+            session()->put('items_on_page', intval($count));
+        }
         return redirect()->back();
     }
 }
