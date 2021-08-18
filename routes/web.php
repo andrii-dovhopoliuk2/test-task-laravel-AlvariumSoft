@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [\App\Http\Controllers\EmployeController::class, 'index']);
 Route::get('employes', [\App\Http\Controllers\EmployeController::class, 'index'])->name('employes');
 Route::get('employes/{department}', [\App\Http\Controllers\EmployeController::class, 'index'])->name('employes.department');
+Route::post('employes-import-xml', [\App\Http\Controllers\EmployeController::class, 'importXml'])->name('employes-import-xml');
+Route::post('department-import-xml', [\App\Http\Controllers\DepartmentController::class, 'importXml'])->name('department-import-xml');
 
 Route::get('set-items-on-page/{count}', [\App\Http\Controllers\SiteController::class, 'setItemsOnPage'])->name('set_items_on_page.count');
 

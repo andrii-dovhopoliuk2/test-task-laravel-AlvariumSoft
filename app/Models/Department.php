@@ -17,9 +17,14 @@ class Department extends Model
         return $this->hasMany(Employe::class);
     }
 
+    /**
+     * @return Department[]|\Illuminate\Database\Eloquent\Collection
+     */
     public static function getDepartments()
     {
         return self::all();
     }
+
+
 
 }

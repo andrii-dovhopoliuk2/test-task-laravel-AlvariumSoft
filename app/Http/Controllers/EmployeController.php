@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
 use App\Models\Employe;
+use Illuminate\Http\Request;
 
 
 class EmployeController extends Controller
@@ -22,4 +24,53 @@ class EmployeController extends Controller
 
         return view('employe.index', compact('employes'));
     }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function importXml(Request $request)
+    {
+        $request->validate(
+            [
+                'employes' => 'file|mimes:xml',
+            ]
+        );
+        if ($request->hasFile('employes')) {
+            $file = $request->file('employes');
+        }
+        $this->saveFromXml($file);
+
+        return redirect()->back();
+    }
+
+    /**
+     * @param $file
+     */
+    private function saveFromXml($file)
+    {
+        try {
+            $xml = simplexml_load_file($file, null, true);
+            foreach ($xml->Item as $item) {
+                $employe = new Employe();
+                $employe->full_name = $item->name;
+                $employe->birthday = $item->birthday;
+                $employe->department_id = $item->department_id;
+                $employe->position = $item->position;
+                $employe->type = $item->type;
+                switch ($employe->type) {
+                    case Employe::TYPE_PAYMENT_MONTHLY:
+                        $employe->monthly_payment = $item->monthly_payment;
+                        break;
+                    case Employe::TYPE_PAYMENT_HOURLY:
+                        echo $employe->monthly_payment = $item->count_hour * $item->hourly_payment;
+                        break;
+                }
+                $employe->save();
+            }
+        } catch (\Exception $exception) {
+            report($exception);
+        }
+    }
+
 }

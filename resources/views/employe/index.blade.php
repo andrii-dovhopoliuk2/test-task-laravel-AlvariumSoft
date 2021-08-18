@@ -4,6 +4,24 @@
 @endsection
 
 @section('content')
+    <br>
+
+    <form id="w1" action="{{ route('department-import-xml') }}" method="post" enctype="multipart/form-data">
+        @csrf
+        <input type="file" name="department">
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">Импорт отделов </button>
+        </div>
+    </form><br>
+
+    <form id="w0" action="{{ route('employes-import-xml') }}" method="post" enctype="multipart/form-data">
+        @csrf
+        <input type="file" name="employes">
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">Импорт сотрудников</button>
+        </div>
+    </form>
+
     <table id="employe-table">
         <tr>
             <th>ФИО</th>
