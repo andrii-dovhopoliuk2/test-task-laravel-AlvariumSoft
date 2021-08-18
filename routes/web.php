@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('employes',  [\App\Http\Controllers\EmployeController::class, 'index'])->name('employes');
-Route::get('employes/{department}',  [\App\Http\Controllers\EmployeController::class, 'index'])->name('employes.department');
-Route::get('/',  [\App\Http\Controllers\EmployeController::class, 'index']);
+Route::get('/', [\App\Http\Controllers\EmployeController::class, 'index']);
+Route::get('employes', [\App\Http\Controllers\EmployeController::class, 'index'])->name('employes');
+Route::get('employes/{department}', [\App\Http\Controllers\EmployeController::class, 'index'])->name('employes.department');
+
+Route::get('set-items-on-page/{count}', [\App\Http\Controllers\SiteController::class, 'setItemsOnPage'])->name('set_items_on_page.count');

@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Department;
+use App\Models\Site;
 
 ?>
     <!DOCTYPE html>
@@ -28,16 +29,12 @@ use App\Models\Department;
                 </div>
             </div>
             <div class="dropdown-count-page">
-                <span>Элементов на странице </span>
-                <div class="dropdown-content">
-                    <a href="">10</a>
-                    <hr>
-                    <a href="">25</a>
-                    <hr>
-                    <a href="">50</a>
-                    <hr>
-                    <a href="">100</a>
-                    <hr>
+                <span>Элементов на странице {{session()->get('items_on_page', 10)}} </span>
+                <div class="dropdown-content count-page-width">
+                    @foreach(Site::getItemsOnPage() as $item)
+                        <a href="{{url('/set-items-on-page/'.$item)}}">{{$item}}</a>
+                        <hr>
+                    @endforeach
                 </div>
             </div>
         </nav>

@@ -33,6 +33,7 @@ nav div div a {
     padding: 5px 5px;
     text-decoration: none;
     color: rgba(60, 50, 10, .95);
+    cursor: pointer;
 }
 nav div div a:hover{
     background: #dbdfe7;
@@ -88,6 +89,7 @@ nav div span {
 .dropdown {
     position: relative;
     display: inline-block;
+    cursor: pointer;
 }
 
 .dropdown-content {
@@ -109,4 +111,9 @@ nav div span {
 
 .dropdown-count-page {
     float: right;
+    cursor: pointer;
+}
+
+.count-page-width {
+    min-width: 28px!important;
 }

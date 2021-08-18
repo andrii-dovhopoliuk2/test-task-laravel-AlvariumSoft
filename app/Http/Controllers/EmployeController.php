@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employe;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+
 
 class EmployeController extends Controller
 {
@@ -19,7 +18,8 @@ class EmployeController extends Controller
         } else {
             $employes = Employe::with('department');
         }
-        $employes = $employes->paginate(10);
+        $employes = $employes->paginate(session()->get('items_on_page', 10));
+
         return view('employe.index', compact('employes'));
     }
 }
